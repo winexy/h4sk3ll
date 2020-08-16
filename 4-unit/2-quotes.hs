@@ -8,15 +8,13 @@ quotes = Map.fromList [
   , ("4", "ghj")
   , ("5", "hjk")]
 
-withDefaultQuote :: Maybe String -> String
-withDefaultQuote (Just quote) = quote
-withDefaultQuote Nothing = "Quote not found :("
-
 getQuote :: [String] -> [String]
 getQuote [] = []
 getQuote ("n":xs) = []
-getQuote (x:xs) = (withDefaultQuote quote):(getQuote xs)
-  where quote = Map.lookup x quotes
+getQuote (x:xs) = quote:(getQuote xs)
+  where quote = case (Map.lookup x quotes) of 
+                  Just text -> text
+                  Nothing -> "Quote not found :("
 
 main :: IO ()
 main = do
