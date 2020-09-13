@@ -43,7 +43,6 @@ printCost (Just cost) = print cost
 
 main :: IO ()
 main = do
-  input <- getArgs
-  let id = (read . head) input :: Int
+  id <- (read . head) <$> getArgs
   let part = Map.lookup id partsDB
   printCost (cost <$> part)
