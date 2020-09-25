@@ -1,5 +1,6 @@
 module Glitch (glitchActions) where
 
+import System.Random
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 
@@ -28,6 +29,12 @@ randomReplaceByte bytes = do
   location <- randomRIO (1, BC.length bytes)
   charVal <- randomRIO (0, 255)
   return (replaceByte location charVal bytes)
+
+sortSection :: Int -> Int -> BC.ByteString -> BC.ByteString
+sortSection start size bytes = mconcat [before,changed,after]
+  where (before,rest) = BC.splitAt start bytes 
+        (target,after) = BC.splitAt size rest 
+        changed = BC.reverse (BC.sort target)
 
 randomSortSection :: BC.ByteString -> IO BC.ByteString
 randomSortSection bytes = do

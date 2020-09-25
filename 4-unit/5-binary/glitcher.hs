@@ -1,5 +1,6 @@
 import System.Environment
 import System.Random
+import Control.Monad
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 import qualified Glitch (glitchActions)
